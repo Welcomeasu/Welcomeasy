@@ -1,12 +1,13 @@
 "use client"
 
 import type React from "react"
-
-import { useState } from "react"
+import { useState, Suspense } from "react"
 import { useRouter, useSearchParams } from "next/navigation"
 import { useToast } from "@/hooks/use-toast"
+import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
 
-export default function InscriptionPage() {
+function InscriptionForm() {
   const router = useRouter()
   const searchParams = useSearchParams()
   const plan = searchParams.get("plan") || "gratuit"
@@ -75,4 +76,68 @@ export default function InscriptionPage() {
       setIsLoading(false)
     }
   }
+
+  return (
+    <div className="container max-w-md mx-auto mt-10 p-6 bg-white rounded-lg shadow-md">
+      <h1 className="text-2xl font-bold mb-6 text-center">Inscription {plan === "pro" ? "Pro" : "Gratuite"}</h1>
+      
+      <form onSubmit={handleSubmit} className="space-y-4">
+        <div>
+          <Input
+            type="email"
+            placeholder="Email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+            disabled={isLoading}
+          />
+        </div>
+        
+        <div>
+          <Input
+            type="password"
+            placeholder="Mot de passe"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+            disabled={isLoading}
+          />
+        </div>
+        
+        <div>
+          <Input
+            type="password"
+            placeholder="Confirmer le mot de passe"
+            value={confirmPassword}
+            onChange={(e) => setConfirmPassword(e.target.value)}
+            required
+            disabled={isLoading}
+          />
+        </div>
+        
+        <Button type="submit" className="w-full" disabled={isLoading}>
+          {isLoading ? "Inscription en cours..." : "S'inscrire"}
+        </Button>
+      </form>
+      
+      <div className="mt-4">
+        <Button
+          variant="outline"
+          onClick={handleGoogleSignup}
+          className="w-full"
+          disabled={isLoading}
+        >
+          Continuer avec Google
+        </Button>
+      </div>
+    </div>
+  )
+}
+
+export default function InscriptionPage() {
+  return (
+    <Suspense fallback={<div>Chargement...</div>}>
+      <InscriptionForm />
+    </Suspense>
+  )
 }
