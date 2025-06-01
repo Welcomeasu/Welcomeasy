@@ -69,4 +69,10 @@ export default function InscriptionPage() {
       toast({
         title: "Erreur d'inscription",
         description: "Un problème est survenu avec l'inscription Google.",
-        \
+        variant: "destructive",
+      })
+    } finally {
+      setIsLoading(false)
+    }
+  }
+}
