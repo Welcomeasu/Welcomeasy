@@ -19,7 +19,7 @@ import {
   Clock,
   Key,
 } from "lucide-react"
-import { useToast } from "@/hooks/use-toast"
+import { toast } from "sonner"
 
 // Données d'exemple pour le livret
 const livretData = {
@@ -89,16 +89,12 @@ const livretData = {
 }
 
 export default function LivretPage() {
-  const { toast } = useToast()
   const [langueActive, setLangueActive] = useState("fr")
 
   const partagerLien = () => {
     const url = window.location.href
     navigator.clipboard.writeText(url)
-    toast({
-      title: "Lien copié !",
-      description: "Le lien du livret a été copié dans votre presse-papiers.",
-    })
+    toast.success("Le lien du livret a été copié dans votre presse-papiers.")
   }
 
   const retourHaut = () => {

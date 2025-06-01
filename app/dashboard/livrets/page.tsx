@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Plus, ExternalLink, Copy, Edit, Trash2, Eye, Calendar, MapPin, BookOpen } from "lucide-react"
-import { useToast } from "@/hooks/use-toast"
+import { toast } from "sonner"
 
 // Données d'exemple
 const livrets = [
@@ -40,23 +40,16 @@ const livrets = [
 ]
 
 export default function LivretsPage() {
-  const { toast } = useToast()
   const [livretsList, setLivretsList] = useState(livrets)
 
   const copierLien = (lien: string) => {
     navigator.clipboard.writeText(lien)
-    toast({
-      title: "Lien copié !",
-      description: "Le lien a été copié dans votre presse-papiers.",
-    })
+    toast.success("Le lien a été copié dans votre presse-papiers.")
   }
 
   const supprimerLivret = (id: string) => {
     setLivretsList(livretsList.filter((livret) => livret.id !== id))
-    toast({
-      title: "Livret supprimé",
-      description: "Le livret a été supprimé avec succès.",
-    })
+    toast.success("Le livret a été supprimé avec succès.")
   }
 
   return (

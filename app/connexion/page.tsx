@@ -5,17 +5,16 @@ import type React from "react"
 import { useState } from "react"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
+import { toast } from "sonner"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Separator } from "@/components/ui/separator"
 import { ArrowLeft } from "lucide-react"
-import { useToast } from "@/hooks/use-toast"
 
 export default function ConnexionPage() {
   const router = useRouter()
-  const { toast } = useToast()
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const [isLoading, setIsLoading] = useState(false)
@@ -28,18 +27,11 @@ export default function ConnexionPage() {
       // Simulation de connexion
       await new Promise((resolve) => setTimeout(resolve, 1000))
 
-      toast({
-        title: "Connexion réussie",
-        description: "Vous êtes maintenant connecté à votre compte.",
-      })
+      toast.success("Vous êtes maintenant connecté à votre compte.")
 
       router.push("/dashboard/livrets")
     } catch (error) {
-      toast({
-        title: "Erreur de connexion",
-        description: "Vérifiez vos identifiants et réessayez.",
-        variant: "destructive",
-      })
+      toast.error("Vérifiez vos identifiants et réessayez.")
     } finally {
       setIsLoading(false)
     }
@@ -52,18 +44,11 @@ export default function ConnexionPage() {
       // Simulation de connexion Google
       await new Promise((resolve) => setTimeout(resolve, 1000))
 
-      toast({
-        title: "Connexion réussie",
-        description: "Vous êtes maintenant connecté avec Google.",
-      })
+      toast.success("Vous êtes maintenant connecté avec Google.")
 
       router.push("/dashboard/livrets")
     } catch (error) {
-      toast({
-        title: "Erreur de connexion",
-        description: "Un problème est survenu avec la connexion Google.",
-        variant: "destructive",
-      })
+      toast.error("Un problème est survenu avec la connexion Google.")
     } finally {
       setIsLoading(false)
     }

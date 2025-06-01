@@ -9,7 +9,7 @@ import { Textarea } from "@/components/ui/textarea"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Plus, Trash2, Wifi, MapPin, Coffee, Car, Utensils, Shield, Phone, ArrowLeft, Save, Eye } from "lucide-react"
 import Link from "next/link"
-import { useToast } from "@/hooks/use-toast"
+import { toast } from "sonner"
 import { useRouter } from "next/navigation"
 
 interface Section {
@@ -31,7 +31,6 @@ const typesSections = [
 ]
 
 export default function NouveauLivretPage() {
-  const { toast } = useToast()
   const router = useRouter()
   const [formData, setFormData] = useState({
     nom: "",
@@ -73,11 +72,7 @@ export default function NouveauLivretPage() {
 
   const enregistrerLivret = () => {
     if (!formData.nom || !formData.adresse) {
-      toast({
-        title: "Erreur",
-        description: "Veuillez remplir au moins le nom et l'adresse du bien.",
-        variant: "destructive",
-      })
+      toast.error("Veuillez remplir au moins le nom et l'adresse du bien.")
       return
     }
 
@@ -87,19 +82,12 @@ export default function NouveauLivretPage() {
 
     setLivretId(id)
 
-    toast({
-      title: "Livret créé avec succès !",
-      description: `Votre livret est accessible à l'adresse : ${lienLivret}`,
-    })
+    toast.success(`Votre livret est accessible à l'adresse : ${lienLivret}`)
   }
 
   const voirApercu = () => {
     if (!formData.nom || !formData.adresse) {
-      toast({
-        title: "Erreur",
-        description: "Veuillez remplir au moins le nom et l'adresse du bien avant de voir l'aperçu.",
-        variant: "destructive",
-      })
+      toast.error("Veuillez remplir au moins le nom et l'adresse du bien avant de voir l'aperçu.")
       return
     }
 
