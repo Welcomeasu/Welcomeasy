@@ -3,7 +3,7 @@
 import type React from "react"
 import { useState, Suspense } from "react"
 import { useRouter, useSearchParams } from "next/navigation"
-import { useToast } from "@/hooks/use-toast"
+import { toast } from "sonner"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 
@@ -11,7 +11,6 @@ function InscriptionForm() {
   const router = useRouter()
   const searchParams = useSearchParams()
   const plan = searchParams.get("plan") || "gratuit"
-  const { toast } = useToast()
   
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
@@ -22,11 +21,7 @@ function InscriptionForm() {
     e.preventDefault()
     
     if (password !== confirmPassword) {
-      toast({
-        title: "Erreur",
-        description: "Les mots de passe ne correspondent pas.",
-        variant: "destructive",
-      })
+      toast.error("Les mots de passe ne correspondent pas.")
       return
     }
     
@@ -36,18 +31,11 @@ function InscriptionForm() {
       // Simulation d'inscription
       await new Promise(resolve => setTimeout(resolve, 1000))
       
-      toast({
-        title: "Compte créé avec succès",
-        description: "Vous êtes maintenant inscrit et connecté.",
-      })
+      toast.success("Compte créé avec succès ! Vous êtes maintenant inscrit et connecté.")
       
       router.push("/dashboard/livrets")
     } catch (error) {
-      toast({
-        title: "Erreur d'inscription",
-        description: "Un problème est survenu lors de la création de votre compte.",
-        variant: "destructive",
-      })
+      toast.error("Un problème est survenu lors de la création de votre compte.")
     } finally {
       setIsLoading(false)
     }
@@ -60,18 +48,11 @@ function InscriptionForm() {
       // Simulation d'inscription Google
       await new Promise(resolve => setTimeout(resolve, 1000))
       
-      toast({
-        title: "Compte créé avec succès",
-        description: "Vous êtes maintenant inscrit avec Google.",
-      })
+      toast.success("Compte créé avec succès ! Vous êtes maintenant inscrit avec Google.")
       
       router.push("/dashboard/livrets")
     } catch (error) {
-      toast({
-        title: "Erreur d'inscription",
-        description: "Un problème est survenu avec l'inscription Google.",
-        variant: "destructive",
-      })
+      toast.error("Un problème est survenu avec l'inscription Google.")
     } finally {
       setIsLoading(false)
     }
