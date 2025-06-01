@@ -1,0 +1,55 @@
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# dependencies
+/node_modules
+/.pnp
+.pnp.js
+
+# testing
+/coverage
+
+# next.js
+/.next/
+/out/
+
+# production
+/build
+
+# misc
+.DS_Store
+*.pem
+
+# debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# env files
+.env*.local
+.env
+
+# vercel
+.vercel
+
+# typescript
+*.tsbuildinfo
+next-env.d.ts
+
+# Large files
+ENVATO/Templates/cityscape-real-estate-react-js-template-2024-05-21-13-41-05-utc.zip
+ENVATO/Vidéos/multiscreen-transitions-split-screen-2024-03-13-16-21-38-utc.zip
+ENVATO/logo/logo-creation-kit-2023-11-27-05-32-20-utc.zip
+ENVATO/Adobe photo shop/testimonials-review-quotes-template-2024-04-17-17-03-40-utc.zip
+ENVATO/Vidéos/branding-mockups-2023-11-27-05-05-26-utc.zip
+ENVATO/Vidéos/cinematic-luts-vol-1-2023-11-27-05-04-43-utc.zip
+ENVATO/Vidéos/light-transitions-for-premiere-pro-2024-03-22-08-46-04-utc.zip
+ENVATO/Adobe photo shop/brand-guidelines-template-2023-11-27-05-32-47-utc.zip
+ENVATO/Vidéos/apartments-hc-immo-holiday-apartments-in-zrnovo-2023-11-27-04-49-49-utc.mp4
+
+# Ignore all large files in these directories
+ENVATO/Templates/*.zip
+ENVATO/Vidéos/*.zip
+ENVATO/Vidéos/*.mp4
+ENVATO/Adobe photo shop/*.zip
+ENVATO/logo/*.zip
